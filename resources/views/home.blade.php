@@ -22,6 +22,14 @@
                 <a href="{{ route('google.login') }}" class="login-button mt-4">Explore All PDF Tools</a>
             </div>
 
+            <!-- this new section -->
+
+            <div class="container">
+                <div class="container">
+                    
+                </div>
+            </div>
+
             <!-- Orbit Section -->
             <div class="orbit-container">
                 <div class="orbit-system">
