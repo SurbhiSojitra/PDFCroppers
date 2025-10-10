@@ -2,9 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Smalot\PdfParser\Parser;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use setasign\Fpdi\Fpdi;
+use Laravel\Socialite\Facades\Socialite;
+use Illuminate\Support\Str;
 
 
 class PdfCroppersContoller extends Controller
@@ -19,6 +24,39 @@ class PdfCroppersContoller extends Controller
         return view('pdfTools');
     }
 
+    public function login()
+    {
+        return view('login');
+    }
+
+    public function redirectToGoogle()
+    {
+        return Socialite::driver('google')
+            ->with(['prompt' => 'select_account'])
+            ->redirect();
+    }
+
+    public function handleGoogleCallback()
+    {
+        try {
+            $googleUser = Socialite::driver('google')->user();
+
+            $user = User::updateOrCreate(
+                ['email' => $googleUser->getEmail()],
+                [
+                    'name' => $googleUser->getName(),
+                    'email_verified_at' => now(),
+                    'password' => Hash::make(Str::random(12)),
+                ]
+            );
+
+            Auth::login($user);
+
+            return redirect()->route('pdfTools');
+        } catch (\Exception $e) {
+            return redirect()->route('login')->with('error', 'Login failed, please try again.');
+        }
+    }
 
     public function PdfProcess(Request $request)
     {

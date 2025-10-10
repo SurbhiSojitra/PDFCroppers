@@ -1,0 +1,321 @@
+body {
+    font-family: 'Rawline', sans-serif;
+}
+
+/* Navbar Padding */
+.navbar-nav .nav-item {
+    padding-left: 20px;
+    font-size: 18px;
+}
+
+/* Button */
+.login-button {
+    font-weight: 700;
+    font-size: 18px;
+    color: #024263;
+    background: #fff;
+    border: 2px solid #024263;
+    display: inline-block;
+    padding: 10px 15px;
+    border-radius: 10px;
+    transition: .2s;
+    text-decoration: none;
+}
+
+.login-button:hover {
+    color: #fff;
+    background: #024263;
+}
+
+.login-button-google {
+    font-weight: 500;
+    font-size: 18px;
+    color: #fff;
+    background: #024263;
+    border: 2px solid #024263;
+    display: inline-block;
+    padding: 10px 15px;
+    border-radius: 30px;
+    transition: .2s;
+    text-decoration: none;
+}
+
+/* Heading */
+.heading h1 {
+    max-width: 600px;
+    font-size: 2.5rem;
+    margin-top: 6%;
+    line-height: 1.5cm;
+}
+
+.orbit-container {
+    position: relative;
+    width: 450px;
+    height: 450px;
+    margin: 0 auto;
+    margin-top: 5%;
+}
+
+.orbit-system {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.orbit-ring {
+    position: absolute;
+    border: 2px solid #e4e6f7;
+    border-radius: 50%;
+    width: 450px;
+    height: 450px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.ring-outer {
+    width: 100%;
+    height: 100%;
+}
+
+/* Central Donut */
+.central-donut {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    background: rgba(185, 206, 219, 0.5);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    z-index: 5;
+}
+
+.central-donut .central-core {
+    position: absolute;
+    width: 160px;
+    height: 160px;
+    background: url(https://png.pngtree.com/png-clipart/20221223/ourmid/pngtree-office-color-inkjet-printer-png-image_6490960.png) center / contain no-repeat #fff;
+    border-radius: 50%;
+    box-shadow: inset 0 2px 8px rgba(0, 0, 0, .1), 0 0 20px rgba(255, 255, 255, .8);
+    z-index: 10;
+}
+
+.central-core {
+    width: 150px;
+    height: 150px;
+    background: #fff;
+    border-radius: 50%;
+}
+
+/* Outer Icons */
+.icon-orbit {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    animation: rotate 50s linear infinite;
+}
+
+.orbit-icon {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    top: 50%;
+    left: 50%;
+    margin: -20px;
+    transform-origin: center;
+    animation: orbit 25s linear infinite;
+    border: 2px solid #fff;
+    border-radius: 50%;
+}
+
+.icon-1 {
+    transform: rotate(0deg);
+    animation-delay: 0s;
+}
+
+.icon-2 {
+    transform: rotate(60deg);
+    animation-delay: -4.33s;
+}
+
+.icon-3 {
+    transform: rotate(120deg);
+    animation-delay: -8.66s;
+}
+
+.icon-4 {
+    transform: rotate(180deg);
+    animation-delay: -12s;
+}
+
+.icon-5 {
+    transform: rotate(240deg);
+    animation-delay: -16.33s;
+}
+
+.icon-6 {
+    transform: rotate(300deg);
+    animation-delay: -20.66s;
+}
+
+
+/* Inner Icons */
+.inner-orbit {
+    position: absolute;
+    width: 50%;
+    height: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: rotate-reverse 35s linear infinite;
+    z-index: 10;
+}
+
+.inner-icon {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    top: 50%;
+    left: 50%;
+    margin: -35px;
+    transform-origin: center;
+
+}
+
+.inner-icon-1 {
+    transform: rotate(0deg) translateX(120px);
+}
+
+.inner-icon-2 {
+    transform: rotate(90deg) translateX(120px);
+}
+
+.inner-icon-3 {
+    transform: rotate(180deg) translateX(120px);
+}
+
+.inner-icon-4 {
+    transform: rotate(270deg) translateX(120px);
+}
+
+/* Animations */
+
+@keyframes orbit {
+    0% {
+        transform: rotate(0deg) translateX(220px) rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg) translateX(220px) rotate(360deg);
+    }
+}
+
+
+
+@keyframes rotate-reverse {
+    0% {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+
+    100% {
+        transform: translate(-50%, -50%) rotate(-360deg);
+    }
+}
+
+/* Images */
+.orbit-icon img,
+.inner-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 50%;
+    border: 5px solid #fff;
+
+}
+
+.light-effect {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 150%;
+    height: 150%;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 0%, transparent 70%);
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+}
+
+/* LOGIN PAGE */
+.login-button-google {
+    font-weight: 500;
+    font-size: 18px;
+    color: #fff;
+    background: #024263;
+    border: 2px solid #024263;
+    padding: 8px 60px;
+    border-radius: 30px;
+    transition: .2s;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.login-card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    width: 450px;
+    height: auto;
+}
+
+.card img {
+    width: 100%;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+
+}
+
+.para p {
+    color: #024263;
+    font-size: 14px;
+}
+
+.service {
+    font-size: 14px;
+}
+
+.line {
+    width: 70%;
+    height: 1px;
+    background-color: #c0bcbc;
+}
+
+
+/* pdftools page */
+
+.box {
+    width: 100%;
+    height: 200px;
+    border: 2px dashed grey;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
