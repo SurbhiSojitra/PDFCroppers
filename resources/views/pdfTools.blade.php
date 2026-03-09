@@ -1,6 +1,6 @@
 @extends('layout.app')
 
-@section('title', 'Home')
+@section('title', 'pdftools')
 
 @push('styles')
 <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet" type="text/css">
