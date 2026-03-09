@@ -64,27 +64,6 @@ class PdfCroppersContoller extends Controller
     //     }
     // }
 
-    // public function handleGoogleCallback()
-    // {
-    //     try {
-    //         $googleUser = Socialite::driver('google')->user();
-
-    //         // check user exists
-    //         $user = User::where('email', $googleUser->getEmail())->first();
-
-    //         if (!$user) {
-    //             return redirect()->route('register')
-    //                 ->with('error', 'You are not registered. Please register first.');
-    //         }
-
-    //         Auth::login($user);
-
-    //         return redirect()->route('pdfTools');
-    //     } catch (\Exception $e) {
-    //         return redirect()->route('login')->with('error', 'Login failed, please try again.');
-    //     }
-    // }
-
     public function handleGoogleCallback()
     {
         try {
@@ -92,13 +71,11 @@ class PdfCroppersContoller extends Controller
 
             $user = User::where('email', $googleUser->getEmail())->first();
 
-            // User registered hoy to login
             if ($user) {
                 Auth::login($user);
                 return redirect()->route('pdfTools');
             }
 
-            // Registered nathi to register page
             return redirect()->route('register')
                 ->with('error', 'You are not registered. Please register first.');
         } catch (\Exception $e) {
