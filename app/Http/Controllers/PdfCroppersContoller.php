@@ -122,6 +122,15 @@ class PdfCroppersContoller extends Controller
         }
     }
 
+    private function makePdfResponse(Request $request, string $pdfContent, string $filename)
+    {
+        $disposition = $request->input('mode') === 'download' ? 'attachment' : 'inline';
+
+        return response($pdfContent)
+            ->header('Content-Type', 'application/pdf')
+            ->header('Content-Disposition', "$disposition; filename=\"$filename\"");
+    }
+
     public function PdfProcess(Request $request)
     {
         $request->validate([
@@ -147,9 +156,7 @@ class PdfCroppersContoller extends Controller
                 }
             }
 
-            return response($pdf->Output('S'))
-                ->header('Content-Type', 'application/pdf')
-                ->header('Content-Disposition', 'inline; filename="merged.pdf"');
+            return $this->makePdfResponse($request, $pdf->Output('S'), 'merged.pdf');
         }
 
         // keep invoice only
@@ -177,9 +184,7 @@ class PdfCroppersContoller extends Controller
                 $pdf->useTemplate($tplId, 0, -$splitY, $size['width'], $size['height']);
             }
 
-            return response($pdf->Output('S'))
-                ->header('Content-Type', 'application/pdf')
-                ->header('Content-Disposition', 'inline; filename="invoice-split.pdf"');
+            return $this->makePdfResponse($request, $pdf->Output('S'), 'invoice-split.pdf');
         }
 
         // Keep invoice no crop
@@ -193,7 +198,7 @@ class PdfCroppersContoller extends Controller
             ]);
         }
 
-        // === REMOVE WHITE SPACE (Fit within same page, no Imagick) ===
+        // === REMOVE WHITE SPACE (Fit within same page) ===
         if ($request->has('removeWhitespace')) {
             $pdf = new Fpdi();
             $file = $files[0];
@@ -224,9 +229,7 @@ class PdfCroppersContoller extends Controller
                 );
             }
 
-            return response($pdf->Output('S'))
-                ->header('Content-Type', 'application/pdf')
-                ->header('Content-Disposition', 'inline; filename="whitespace-removed.pdf"');
+            return $this->makePdfResponse($request, $pdf->Output('S'), 'whitespace-removed.pdf');
         }
 
         // Print date time on label
@@ -253,9 +256,7 @@ class PdfCroppersContoller extends Controller
                     }
                 }
             }
-            return response($pdf->Output('S'))
-                ->header('Content-Type', 'application/pdf')
-                ->header('Content-Disposition', 'inline; filename="invoice.pdf"');
+            return $this->makePdfResponse($request, $pdf->Output('S'), 'invoice.pdf');
         }
 
         // === sort by sold by ===
@@ -293,9 +294,7 @@ class PdfCroppersContoller extends Controller
                 }
             }
 
-            return response($pdf->Output('S'))
-                ->header('Content-Type', 'application/pdf')
-                ->header('Content-Disposition', 'inline; filename="sorted-by-sold-by.pdf"');
+            return $this->makePdfResponse($request, $pdf->Output('S'), 'sorted-by-sold-by.pdf');
         }
 
         // === Sort By Courier Wise ===
@@ -348,9 +347,7 @@ class PdfCroppersContoller extends Controller
                 $pdf->useTemplate($tplId);
             }
 
-            return response($pdf->Output('S'))
-                ->header('Content-Type', 'application/pdf')
-                ->header('Content-Disposition', 'inline; filename="sorted_pickup.pdf"');
+            return $this->makePdfResponse($request, $pdf->Output('S'), 'sorted_pickup.pdf');
         }
 
         // === SEPARATE REVIEW ORDERS USING LIST ===
@@ -384,9 +381,7 @@ class PdfCroppersContoller extends Controller
                 }
 
                 if ($matchedPages > 0) {
-                    return response($pdf->Output('S'))
-                        ->header('Content-Type', 'application/pdf')
-                        ->header('Content-Disposition', 'inline; filename="review_orders.pdf"');
+                    return $this->makePdfResponse($request, $pdf->Output('S'), 'review_orders.pdf');
                 }
             }
 
@@ -430,9 +425,7 @@ class PdfCroppersContoller extends Controller
                 $pdf->useTemplate($page['tplId']);
             }
 
-            return response($pdf->Output('S'))
-                ->header('Content-Type', 'application/pdf')
-                ->header('Content-Disposition', 'inline; filename="sorted_pickups.pdf"');
+            return $this->makePdfResponse($request, $pdf->Output('S'), 'sorted_pickups.pdf');
         }
 
         // === Multi order at bottom ===
@@ -491,9 +484,7 @@ class PdfCroppersContoller extends Controller
             }
 
             // Return PDF
-            return response($pdf->Output('S'))
-                ->header('Content-Type', 'application/pdf')
-                ->header('Content-Disposition', 'inline; filename="multi_order_sorted.pdf"');
+            return $this->makePdfResponse($request, $pdf->Output('S'), 'multi_order_sorted.pdf');
         }
 
         // === Add picklist page after orders ===
@@ -656,17 +647,22 @@ class PdfCroppersContoller extends Controller
             $pdf->Ln();
         }
 
-        return response($pdf->Output('S'))
-            ->header('Content-Type', 'application/pdf')
-            ->header('Content-Disposition', 'inline; filename="picklist_summary.pdf"');
+        return $this->makePdfResponse($request, $pdf->Output('S'), 'picklist_summary.pdf');
 
         // Default: return the first uploaded PDF
         $file = $files[0];
 
-        return response()->download(
-            $file->getRealPath(),
-            $file->getClientOriginalName(),
-            ['Content-Type' => 'application/pdf']
-        );
+        if ($request->input('mode') === 'download') {
+            return response()->download(
+                $file->getRealPath(),
+                $file->getClientOriginalName(),
+                ['Content-Type' => 'application/pdf']
+            );
+        }
+
+        return response()->file($file->getRealPath(), [
+            'Content-Type' => 'application/pdf',
+            'Content-Disposition' => 'inline; filename="' . $file->getClientOriginalName() . '"',
+        ]);
     }
 }

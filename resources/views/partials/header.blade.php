@@ -9,13 +9,13 @@
         <div class="collapse navbar-collapse" id="mynavbar">
             <ul class="navbar-nav ms-auto fw-bold">
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('pdfTools') }}">Crop PDF</a>
+                    <a class="nav-link" href="{{ route('google.login') }}">Crop PDF</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">E-Commerce</a>
+                    <a class="nav-link" href="{{ route('google.login') }}">E-Commerce</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">All PDF Tools</a>
+                    <a class="nav-link" href="{{ route('google.login') }}">All PDF Tools</a>
                 </li>
 
                 <li class="nav-item">
