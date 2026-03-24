@@ -319,3 +319,156 @@ body {
     justify-content: center;
     cursor: pointer;
 }
+
+
+.interest-section {
+    padding: 80px 10%;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 32px;
+    margin-bottom: 50px;
+    color: #123b53;
+}
+
+.interest-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 40px;
+}
+
+.interest-left {
+    width: 50%;
+}
+
+.interest-left h3 {
+    font-size: 28px;
+    color: #123b53;
+    margin-bottom: 15px;
+}
+
+.interest-left p {
+    color: #6c7a89;
+    line-height: 1.6;
+}
+
+.interest-card {
+    width: 380px;
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.icon {
+    width: 60px;
+    height: 60px;
+    background: #eef3f6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.interest-card label {
+    display: block;
+    margin: 10px 0 5px;
+    font-size: 18px;
+    color: #123b53;
+}
+
+.interest-card input {
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #d9e0e6;
+    border-radius: 5px;
+}
+
+.savings-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.savings-row input {
+    width: 120px;
+}
+
+.currency,
+.clock,
+.hrs {
+    color: #123b53;
+    font-size: 16px;
+}
+
+.tools-section {
+    text-align: center;
+    font-family: Arial, sans-serif;
+}
+
+.tools-title {
+    font-size: 36px;
+    color: #0d3c55;
+    margin-bottom: 10px;
+}
+
+.tools-subtitle {
+    font-size: 18px;
+    color: #5f6f7c;
+    margin-bottom: 60px;
+}
+
+.tools-steps {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    position: relative;
+}
+
+.tools-steps::before {
+    content: "";
+    position: absolute;
+    top: 35px;
+    left: 12%;
+    right: 12%;
+    height: 2px;
+    background: #d9e1e7;
+    z-index: 0;
+}
+
+.step {
+    width: 30%;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+
+.circle1 {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: #eef2f5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    color: #0d3c55;
+    margin: 0 auto 20px auto;
+    border: 3px solid #e6edf3;
+}
+
+.step h3 {
+    font-size: 20px;
+    color: #0d3c55;
+    margin-bottom: 10px;
+}
+
+.step p {
+    color: #6b7b88;
+    line-height: 1.6;
+    font-size: 14px;
+}
